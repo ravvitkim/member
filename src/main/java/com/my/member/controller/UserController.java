@@ -103,6 +103,8 @@ public class UserController {
     @GetMapping("myInfo")
     public String myInfo(HttpSession session) {
         String myEmail = session.getAttribute("loginEmail").toString();
+        UserDto user = userService.findOneUser(myEmail);
+        session.setAttribute("user", user);
         return null;
     }
 }
