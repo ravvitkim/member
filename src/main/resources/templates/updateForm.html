@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>수정화면</title>
+</head>
+<body>
+  <form th:action="@{/member/update}" method="post" th:object="${dto}">
+    <div>
+      <label for="id">ID</label>
+      <input type="text" name="id" th:field="*{id}" disabled>
+      <input type="hidden" name="id" th:value="*{id}">
+
+    </div>
+    <div>
+      <label for="name">이름</label>
+      <input type="text" name="name" th:field="*{name}">
+      <span th:errors="${dto.name}" style="font-size:10; color:red"></span>
+    </div>
+    <div>
+      <label for="age">나이</label>
+      <input type="text" name="age" th:field="*{age}">
+      <span th:errors="${dto.age}" style="font-size:10; color:red"></span>
+    </div>
+    <div>
+      <label for="address">주소</label>
+      <input type="text" name="address" th:field="*{address}">
+      <span th:errors="${dto.address}" style="font-size:10; color:red"></span>
+    </div>
+    <div>
+      <input type="submit" value="등록">
+    </div>
+  </form>
+  <br>
+  <hr>
+  <br>
+  <a th:href="@{/list}">메인리스트페이지로 이동</a>
+</body>
+</html>

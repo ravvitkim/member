@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Title</title>
+</head>
+<body align="center">
+<h1>멤버리스트 보기</h1>
+<table border="1" align="center">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>이름</th>
+        <th>나이</th>
+        <th>주소</th>
+        <th>수정</th>
+        <th>삭제</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${list}==null">
+        <td colspan="6">데이터가 없습니다.</td>
+    </tr>
+    <tr th:unless="${list}==null" th:each="member : ${list}" th:object="${member}">
+        <td th:text="*{id}">1</td>
+        <td th:text="*{name}">홍길동</td>
+        <td th:text="*{age}">90</td>
+        <td th:text="*{address}">제주도</td>
+        <td>
+            <form th:action="@{/member/updateView}" method="get">
+                <input type="submit" value="수정">
+                <input type="hidden" name="updateId" th:value="*{id}">
+            </form>
+        </td>
+        <td>
+            <form th:action="@{|/member/delete/*{id}|}" method="post">
+                <input type="submit" value="삭제">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<hr>
+<form th:action="@{/member/search}" method="get" align="center">
+    <select name="type">
+        <!--   type = 'name' or type = 'address'         -->
+        <option selected value="">검색내용선택</option>
+        <option value="name">이름</option>
+        <option value="address">주소</option>
+    </select>
+    <input type="text" name="keyword" placeholder="검색어를 입력하세요">
+    <input type="submit" value="검색">
+</form>
+<hr>
+<br>
+<form  th:action="@{/member/insertForm}"  method="get">
+    <input type="submit" value="신규멤버입력">
+</form>
+</body>
+</html>
