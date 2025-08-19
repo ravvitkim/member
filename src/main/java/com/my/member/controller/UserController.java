@@ -107,4 +107,9 @@ public class UserController {
         session.setAttribute("user", user);
         return null;
     }
+
+    @GetMapping("myPage")
+    public String myPage() {
+        return "/user/myPage";
+    }
 }
